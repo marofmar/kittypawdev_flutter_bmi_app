@@ -1,43 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bmi_app/pages/home/widgets/gender_box.dart';
+import 'package:flutter_bmi_app/pages/home/widgets/slider_box.dart';
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(title: Text('BMI Calculator')),
-        body: Column(
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Theme.of(context).dividerColor,
-                ),
-              ),
-            ),
-            Icon(Icons.male),
-            Text('MALE'),
-            Slider(
-              min: 0,
-              max: 100,
-              value: 50,
-              onChanged: (v) {},
-            ),
-            SizedBox(
-                width: 200,
-                height: 56,
-                child:
-                    ElevatedButton(onPressed: () {}, child: Text('Calculate'))),
-            SizedBox(height: 10),
-            SizedBox(
-                width: 200,
-                height: 56,
-                child: OutlinedButton(
-                    onPressed: () {}, child: Text('Recalculate'))),
-            Text('test',
-                style: TextStyle(color: Theme.of(context).highlightColor))
-          ],
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
+          child: Column(
+            children: [
+              GenderBox(),
+              Spacer(),
+              SliderBox(label: "HEIGHT", value: 170, unit: "cm"),
+              Spacer(),
+              SliderBox(label: "WEIGHT", value: 63, unit: "kg"),
+              Spacer(),
+              SizedBox(
+                  width: double.infinity,
+                  height: 56,
+                  child: ElevatedButton(
+                      onPressed: () {}, child: Text('Calculate'))),
+            ],
+          ),
         ));
   }
 }
