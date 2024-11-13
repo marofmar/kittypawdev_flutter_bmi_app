@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bmi_app/pages/home/home_page.dart';
+import 'package:flutter_bmi_app/theme.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,12 +13,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         themeMode: ThemeMode.light,
-        theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.pinkAccent, brightness: Brightness.light)),
-        darkTheme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(
-                seedColor: Colors.pinkAccent, brightness: Brightness.dark)),
+        theme: lightTheme,
+        darkTheme: darkTheme,
         home: HomePage());
   }
 }
