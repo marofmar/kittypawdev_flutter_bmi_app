@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        themeMode: ThemeMode.light,
+        themeMode: ThemeMode.system, // 디바이스의 모드를 따라가도록 변경
         theme: lightTheme,
         darkTheme: darkTheme,
         home: HomePage());

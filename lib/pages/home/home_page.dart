@@ -1,8 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bmi_app/pages/home/widgets/gender_box.dart';
 import 'package:flutter_bmi_app/pages/home/widgets/slider_box.dart';
+import 'package:flutter_bmi_app/pages/result/result_page.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool isMale = true;
+  void onGenderChanged(bool male) {
+    setState(() {
+      isMale = male;
+    });
+  }
+
+  double height = 170;
+  void onHeightChanged(double newHeight) {
+    setState(
+      () {
+        height = newHeight;
+      },
+    );
+  }
+
+  double weight = 70;
+  void onWeightChanged(double newWeight) {
+    setState(() {
+      weight = newWeight;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,17 +40,35 @@ class HomePage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 50),
           child: Column(
             children: [
-              GenderBox(),
+              GenderBox(isMale, onGenderChanged),
               Spacer(),
-              SliderBox(label: "HEIGHT", value: 170, unit: "cm"),
+              SliderBox(
+                  label: "HEIGHT",
+                  value: height,
+                  unit: "cm",
+                  onChanged: onHeightChanged),
               Spacer(),
-              SliderBox(label: "WEIGHT", value: 63, unit: "kg"),
+              SliderBox(
+                label: "WEIGHT",
+                value: weight,
+                unit: "kg",
+                onChanged: onWeightChanged,
+              ),
               Spacer(),
               SizedBox(
                   width: double.infinity,
                   height: 56,
                   child: ElevatedButton(
-                      onPressed: () {}, child: Text('Calculate'))),
+                      onPressed: () {
+                        final meterHeight = height / 100;
+                        final bmi = weight / (meterHeight * meterHeight);
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return ResultPage(bmi);
+                          },
+                        ));
+                      },
+                      child: Text('Calculate'))),
             ],
           ),
         ));
